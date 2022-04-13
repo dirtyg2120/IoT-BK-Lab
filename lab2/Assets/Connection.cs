@@ -20,18 +20,15 @@ public class Connection : MonoBehaviour {
 
 
     private void Start() {
-
-        // DontDestroyOnLoad(this);
-        Debug.Log("LogIn");
-        // BrokerUrl.text = "mqttserver.tk";
-        // Username.text = "bkiot";
-        // Password.text = "12345678";
+        BrokerUrl.text = "mqttserver.tk";
+        Username.text = "bkiot";
+        Password.text = "12345678";
         // BrokerUrl.text = "test.mosquitto.org";
-        // Username.text = "rw";
-        // Password.text = "readwrite";
-        BrokerUrl.text = "test.mosquitto.org";
-        Username.text = "wildcard";
-        Password.text = "";
+        // Username.text = "wildcard";
+        // Password.text = "";
+        // BrokerUrl.text = "demo.thingsboard.io";
+        // Username.text = "quocanh";
+        // Password.text = "22112000";
 
         brokerurl += BrokerUrl.text;
         username += Username.text;
