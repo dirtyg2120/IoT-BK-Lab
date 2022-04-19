@@ -47,17 +47,47 @@ def subscribed(client, userdata, mid, granted_qos):
 
 def recv_message(client, userdata, message):
     print("Received: ", message.payload.decode("utf-8"))
-    temp_data = {'value': True}
-    cmd = 1
-    #TODO: Update the cmd to control 2 devices
+    temp_data_led = {'value': True}
+    temp_data_fan = {'value': True}
+    cmd = -1
     try:
         jsonobj = json.loads(message.payload)
-        if jsonobj['method'] == "setLED":
-            temp_data['value'] = jsonobj['params']
-            client.publish('v1/devices/me/attributes', json.dumps(temp_data), 1)
-        if jsonobj['method'] == "setFAN":
-            temp_data['value'] = jsonobj['params']
-            client.publish('v1/devices/me/attributes', json.dumps(temp_data), 1)
+        if jsonobj['method'] == "setLed":
+            temp_data_led['value'] = jsonobj['params']
+            if temp_data_led['value'] is True:
+                cmd = 0
+            else:
+                cmd = 1
+            client.publish('v1/devices/me/attributes', json.dumps(temp_data_led), 1)
+        if jsonobj['method'] == "setFan":
+            temp_data_fan['value'] = jsonobj['params']
+            if temp_data_fan['value'] is True:
+                cmd = 2
+            else:
+                cmd = 3
+            client.publish('v1/devices/me/attributes', json.dumps(temp_data_fan), 1)
+
+def recv_message(client, userdata, message):
+    print("Received: ", message.payload.decode("utf-8"))
+    temp_data_led = {'value': True}
+    temp_data_fan = {'value': True}
+    cmd = -1
+    try:
+        jsonobj = json.loads(message.payload)
+        if jsonobj['method'] == "setLed":
+            temp_data_led['value'] = jsonobj['params']
+            if temp_data_led['value'] is True:
+                cmd = 0
+            else:
+                cmd = 1
+            client.publish('v1/devices/me/attributes', json.dumps(temp_data_led), 1)
+        if jsonobj['method'] == "setFan":
+            temp_data_fan['value'] = jsonobj['params']
+            if temp_data_fan['value'] is True:
+                cmd = 2
+            else:
+                cmd = 3
+            client.publish('v1/devices/me/attributes', json.dumps(temp_data_fan), 1)
     except:
         pass
 
